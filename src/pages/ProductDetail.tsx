@@ -1,7 +1,9 @@
 import { useParams } from "react-router-dom";
 import { getProductBySlug } from "../lib/products";
 import { rateProduct } from "../lib/rating";
+import { suggestAlternatives } from "../lib/alternatives";
 import RatingBadge from "../components/RatingBadge";
+import ProductCard from "../components/ProductCard";
 
 export default function ProductDetail() {
   const { slug } = useParams();
@@ -12,6 +14,7 @@ export default function ProductDetail() {
   }
 
   const rating = rateProduct(product);
+  const alternatives = suggestAlternatives(product);
 
   return (
     <div className="max-w-2xl mx-auto px-6 py-10">
@@ -33,6 +36,17 @@ export default function ProductDetail() {
           </p>
         )}
       </div>
+
+      {alternatives.length > 0 && (
+        <div className="mt-10">
+          <p className="font-medium text-deep mb-3">Cleaner alternatives</p>
+          <div className="grid grid-cols-2 gap-4">
+            {alternatives.map((alt) => (
+              <ProductCard key={alt.id} product={alt} />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
