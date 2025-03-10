@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { getProductBySlug } from "../lib/products";
 import { rateProduct } from "../lib/rating";
 import { suggestAlternatives } from "../lib/alternatives";
+import { useCart } from "../context/CartContext";
 import RatingBadge from "../components/RatingBadge";
 import ProductCard from "../components/ProductCard";
 
@@ -15,6 +16,7 @@ export default function ProductDetail() {
 
   const rating = rateProduct(product);
   const alternatives = suggestAlternatives(product);
+  const { addItem } = useCart();
 
   return (
     <div className="max-w-2xl mx-auto px-6 py-10">
@@ -26,6 +28,12 @@ export default function ProductDetail() {
         {product.brand} · ${product.price}
       </p>
       <p className="mt-4">{product.description}</p>
+      <button
+        onClick={() => addItem(product)}
+        className="mt-4 bg-deep text-white px-5 py-2 rounded-md"
+      >
+        Add to cart
+      </button>
 
       <div className="mt-6 text-sm">
         <p className="font-medium text-deep">Materials</p>
