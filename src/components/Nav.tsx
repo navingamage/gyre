@@ -13,6 +13,7 @@ export default function Nav() {
         </Link>
         <nav className="flex gap-6 text-sm text-kelp items-center">
           <Link to="/">Shop</Link>
+          <Link to="/blog">Ratings</Link>
           <Link to="/cart">Cart ({itemCount})</Link>
         </nav>
       </div>
