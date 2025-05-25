@@ -54,4 +54,30 @@ describe("rateProduct", () => {
     expect(result.score).toBe(0);
     expect(result.grade).toBe("F");
   });
+
+  it("is case-insensitive when matching known plastics", () => {
+    const result = rateProduct(makeProduct({ synthetics: ["Elastane"] }));
+    expect(result.synthetics).toContain("Elastane");
+    expect(result.score).toBe(80);
+  });
+
+  it("matches plastics embedded in compound material names", () => {
+    const result = rateProduct(makeProduct({ materials: ["recycled-polyethylene"] }));
+    expect(result.synthetics).toContain("recycled-polyethylene");
+    expect(result.score).toBe(75);
+  });
+
+  it("does not flag natural materials that merely contain similar substrings", () => {
+    const result = rateProduct(makeProduct({ materials: ["organic-cotton", "beeswax"] }));
+    expect(result.synthetics).toEqual([]);
+    expect(result.score).toBe(100);
+  });
+
+  it("assigns grade boundaries correctly", () => {
+    expect(rateProduct(makeProduct({ synthetics: ["elastane"] })).grade).toBe("B"); // 80
+    expect(rateProduct(makeProduct({ materials: ["polyester"] })).grade).toBe("B"); // 75
+    expect(
+      rateProduct(makeProduct({ materials: ["polyester"], packaging: "mixed" })).grade
+    ).toBe("D"); // 55
+  });
 });
