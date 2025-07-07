@@ -27,7 +27,10 @@ export default function Cart() {
                 type="number"
                 min={0}
                 value={line.quantity}
-                onChange={(e) => setQuantity(line.product.id, Number(e.target.value))}
+                onChange={(e) => {
+                  const parsed = parseInt(e.target.value, 10);
+                  setQuantity(line.product.id, Number.isNaN(parsed) ? 0 : parsed);
+                }}
                 className="w-16 border border-deep/20 rounded px-2 py-1"
               />
               <button onClick={() => removeItem(line.product.id)} className="text-sm text-coral">
