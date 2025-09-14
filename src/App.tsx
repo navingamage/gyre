@@ -14,7 +14,7 @@ export default function App() {
   return (
     <CartProvider>
       <BrowserRouter>
-        <div className="min-h-screen bg-foam flex flex-col">
+        <div className="min-h-screen bg-foam dark:bg-slate-900 flex flex-col">
           <Nav />
           <div className="flex-1">
             <Routes>

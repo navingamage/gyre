@@ -21,7 +21,7 @@ export default function ProductDetail() {
   return (
     <div className="max-w-2xl mx-auto px-6 py-10">
       <div className="flex items-center gap-3">
-        <h1 className="text-2xl font-bold text-deep">{product.name}</h1>
+        <h1 className="text-2xl font-bold text-deep dark:text-foam">{product.name}</h1>
         <RatingBadge rating={rating} />
       </div>
       <p className="text-kelp mt-1">
@@ -36,7 +36,7 @@ export default function ProductDetail() {
       </button>
 
       <div className="mt-6 text-sm">
-        <p className="font-medium text-deep">Materials</p>
+        <p className="font-medium text-deep dark:text-foam">Materials</p>
         <p className="text-kelp">{product.materials.join(", ") || "—"}</p>
         {rating.synthetics.length > 0 && (
           <p className="mt-2 text-orange-700">
@@ -47,7 +47,7 @@ export default function ProductDetail() {
 
       {alternatives.length > 0 && (
         <div className="mt-10">
-          <p className="font-medium text-deep mb-3">Cleaner alternatives</p>
+          <p className="font-medium text-deep dark:text-foam mb-3">Cleaner alternatives</p>
           <div className="grid grid-cols-2 gap-4">
             {alternatives.map((alt) => (
               <ProductCard key={alt.id} product={alt} />

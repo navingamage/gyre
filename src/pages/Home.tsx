@@ -29,7 +29,7 @@ export default function Home() {
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-10">
-      <h1 className="text-2xl font-bold text-deep mb-6">Shop microplastic-free</h1>
+      <h1 className="text-2xl font-bold text-deep dark:text-foam mb-6">Shop microplastic-free</h1>
 
       <div className="flex flex-col sm:flex-row gap-3 mb-6">
         <input
@@ -37,12 +37,12 @@ export default function Home() {
           placeholder="Search products or brands"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="flex-1 border border-deep/20 rounded px-3 py-2"
+          className="flex-1 border border-deep/20 rounded px-3 py-2 dark:bg-slate-800 dark:text-foam dark:border-slate-600"
         />
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value as Category | "all")}
-          className="border border-deep/20 rounded px-3 py-2"
+          className="border border-deep/20 rounded px-3 py-2 dark:bg-slate-800 dark:text-foam dark:border-slate-600"
         >
           {CATEGORIES.map((c) => (
             <option key={c} value={c}>
