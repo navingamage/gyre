@@ -31,6 +31,25 @@ carves out a specific, underserved slice of it.
 React + TypeScript + Vite + Tailwind CSS, tested with Vitest. Currently a
 frontend prototype backed by static seed data — no real backend/payments yet.
 
+## Architecture
+
+- `src/lib/rating.ts` — the microplastic scoring engine. Pure function, no
+  hidden state: takes a product's materials/synthetics/packaging and returns
+  an auditable 0-100 score and letter grade.
+- `src/lib/alternatives.ts` — given a product, finds same-category products
+  with a strictly better score.
+- `src/context/CartContext.tsx` — cart state, persisted to `localStorage`.
+- `src/data/products.json`, `src/data/articles.ts` — seed content. In a real
+  version these would be a database and a CMS respectively.
+- `src/pages/*` — one route per page, routed with `react-router-dom`.
+
+## Roadmap
+
+- [ ] Real backend + persistent orders (currently client-only)
+- [ ] Brand partner intake flow
+- [ ] Expand the rating engine beyond keyword matching (e.g. ingredient DB)
+- [ ] Payments
+
 ## Status
 
 Early and actively evolving as a side project. See commit history for the
