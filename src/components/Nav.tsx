@@ -17,6 +17,7 @@ export default function Nav() {
           <Link to="/">Shop</Link>
           <Link to="/blog">Ratings</Link>
           <Link to="/certifications">Certifications</Link>
+          <Link to="/partners">Sell on Gyre</Link>
           <Link to="/cart">Cart ({itemCount})</Link>
           <button onClick={toggle} aria-label="Toggle dark mode" className="text-lg">
             {dark ? "☀️" : "🌙"}
