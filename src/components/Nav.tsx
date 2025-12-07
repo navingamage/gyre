@@ -19,7 +19,12 @@ export default function Nav() {
           <Link to="/certifications">Certifications</Link>
           <Link to="/partners">Sell on Gyre</Link>
           <Link to="/cart">Cart ({itemCount})</Link>
-          <button onClick={toggle} aria-label="Toggle dark mode" className="text-lg">
+          <button
+            onClick={toggle}
+            aria-label="Toggle dark mode"
+            aria-pressed={dark}
+            className="text-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-kelp rounded"
+          >
             {dark ? "☀️" : "🌙"}
           </button>
         </nav>

@@ -26,6 +26,7 @@ export default function Cart() {
               <input
                 type="number"
                 min={0}
+                aria-label={`Quantity for ${line.product.name}`}
                 value={line.quantity}
                 onChange={(e) => {
                   const parsed = parseInt(e.target.value, 10);
@@ -33,7 +34,11 @@ export default function Cart() {
                 }}
                 className="w-16 border border-deep/20 rounded px-2 py-1"
               />
-              <button onClick={() => removeItem(line.product.id)} className="text-sm text-coral">
+              <button
+                onClick={() => removeItem(line.product.id)}
+                aria-label={`Remove ${line.product.name} from cart`}
+                className="text-sm text-coral focus:outline-none focus-visible:ring-2 focus-visible:ring-coral rounded"
+              >
                 Remove
               </button>
             </div>

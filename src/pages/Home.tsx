@@ -34,15 +34,17 @@ export default function Home() {
       <div className="flex flex-col sm:flex-row gap-3 mb-6">
         <input
           type="search"
+          aria-label="Search products or brands"
           placeholder="Search products or brands"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="flex-1 border border-deep/20 rounded px-3 py-2 dark:bg-slate-800 dark:text-foam dark:border-slate-600"
+          className="flex-1 border border-deep/20 rounded px-3 py-2 dark:bg-slate-800 dark:text-foam dark:border-slate-600 focus:outline-none focus:ring-2 focus:ring-kelp"
         />
         <select
+          aria-label="Filter by category"
           value={category}
           onChange={(e) => setCategory(e.target.value as Category | "all")}
-          className="border border-deep/20 rounded px-3 py-2 dark:bg-slate-800 dark:text-foam dark:border-slate-600"
+          className="border border-deep/20 rounded px-3 py-2 dark:bg-slate-800 dark:text-foam dark:border-slate-600 focus:outline-none focus:ring-2 focus:ring-kelp"
         >
           {CATEGORIES.map((c) => (
             <option key={c} value={c}>

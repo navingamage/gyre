@@ -8,7 +8,7 @@ export default function ProductCard({ product }: { product: Product }) {
   return (
     <Link
       to={`/products/${product.slug}`}
-      className="block bg-white dark:bg-slate-800 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow"
+      className="block bg-white dark:bg-slate-800 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-kelp"
     >
       <div className="flex items-start justify-between gap-2">
         <p className="font-medium text-deep dark:text-foam">{product.name}</p>
