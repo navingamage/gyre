@@ -10,6 +10,7 @@ import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Certifications from "./pages/Certifications";
 import Partners from "./pages/Partners";
+import NotFound from "./pages/NotFound";
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
               <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/certifications" element={<Certifications />} />
               <Route path="/partners" element={<Partners />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
           <Footer />
