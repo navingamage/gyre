@@ -1,10 +1,11 @@
+import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import type { Product } from "../types";
 import { rateProduct } from "../lib/rating";
 import RatingBadge from "./RatingBadge";
 
 export default function ProductCard({ product }: { product: Product }) {
-  const rating = rateProduct(product);
+  const rating = useMemo(() => rateProduct(product), [product]);
   return (
     <Link
       to={`/products/${product.slug}`}
