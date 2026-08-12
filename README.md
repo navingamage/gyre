@@ -46,7 +46,7 @@ frontend prototype backed by static seed data — no real backend/payments yet.
 ## Roadmap
 
 - [ ] Real backend + persistent orders (currently client-only)
-- [ ] Brand partner intake flow
+- [x] Brand partner intake flow
 - [ ] Expand the rating engine beyond keyword matching (e.g. ingredient DB)
 - [ ] Payments
 
