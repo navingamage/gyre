@@ -1,0 +1,13 @@
+name = "gyre"
+pages_build_output_dir = "dist"
+compatibility_date = "2026-08-13"
+compatibility_flags = ["nodejs_compat"]
+
+# Created once via `wrangler d1 create gyre-db`, then this database_id is
+# replaced with the real one. Local dev (`wrangler pages dev --local`)
+# never calls the Cloudflare API for this binding, so the placeholder
+# below is fine until a real database exists.
+[[d1_databases]]
+binding = "DB"
+database_name = "gyre-db"
+database_id = "00000000-0000-0000-0000-000000000000"

@@ -1,0 +1,4 @@
+# SPA fallback: Cloudflare Pages checks /functions routes and static
+# files first, so this only ever catches client-routed paths like
+# /products/:slug that don't correspond to a real file.
+/*  /index.html  200
