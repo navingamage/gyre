@@ -1,4 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
 import { useDarkMode } from "../hooks/useDarkMode";
 import GyreMark from "./icons/GyreMark";
@@ -12,6 +13,7 @@ const LINKS = [
 
 export default function Nav() {
   const { lines } = useCart();
+  const { user, logout } = useAuth();
   const { dark, toggle } = useDarkMode();
   const itemCount = lines.reduce((sum, l) => sum + l.quantity, 0);
 
@@ -42,6 +44,24 @@ export default function Nav() {
           >
             Cart ({itemCount})
           </Link>
+          {user ? (
+            <span className="flex items-center gap-3">
+              <span className="text-kelp dark:text-foam/70 hidden sm:inline">{user.email}</span>
+              <button
+                onClick={logout}
+                className="text-kelp dark:text-foam/80 hover:text-deep dark:hover:text-foam transition-colors"
+              >
+                Sign out
+              </button>
+            </span>
+          ) : (
+            <Link
+              to="/login"
+              className="text-kelp dark:text-foam/80 hover:text-deep dark:hover:text-foam transition-colors"
+            >
+              Sign in
+            </Link>
+          )}
           <button
             onClick={toggle}
             aria-label="Toggle dark mode"
