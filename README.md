@@ -28,32 +28,75 @@ carves out a specific, underserved slice of it.
 
 ## Stack
 
-React + TypeScript + Vite + Tailwind CSS, tested with Vitest. Currently a
-frontend prototype backed by static seed data — no real backend/payments yet.
+Runs entirely on Cloudflare's edge — no origin server, no AWS.
+
+- **Frontend** — React + TypeScript + Vite + Tailwind CSS
+- **API** — Cloudflare Pages Functions (Workers runtime)
+- **Database** — Cloudflare D1 (SQLite at the edge), plain parameterised SQL
+- **Payments** — Stripe Checkout, called over `fetch` with no SDK dependency
+- **Tests** — Vitest (57 tests)
+
+Runtime dependencies are React, the router, and two font packages. Auth,
+password hashing, session handling and Stripe signature verification are all
+written against WebCrypto rather than pulled in as libraries — the point of
+this repo is to show the mechanism, not to hide it behind a package.
 
 ## Architecture
+
+**Frontend**
 
 - `src/lib/rating.ts` — the microplastic scoring engine. Pure function, no
   hidden state: takes a product's materials/synthetics/packaging and returns
   an auditable 0-100 score and letter grade.
-- `src/lib/alternatives.ts` — given a product, finds same-category products
-  with a strictly better score.
+- `src/lib/alternatives.ts` — given a product and a catalog, finds
+  same-category products with a strictly better score.
+- `src/context/AuthContext.tsx` — session state, hydrated from `/api/auth/me`.
 - `src/context/CartContext.tsx` — cart state, persisted to `localStorage`.
-- `src/data/products.json`, `src/data/articles.ts` — seed content. In a real
-  version these would be a database and a CMS respectively.
-- `src/pages/*` — one route per page, routed with `react-router-dom`.
+- `src/pages/*` — one route per page, lazily loaded so each is its own chunk.
+
+**Backend** (`functions/`)
+
+- `lib/hash.ts` — PBKDF2-HMAC-SHA256 password hashing (210k rounds, per-user
+  salt, cost recorded alongside the digest so it can be raised later).
+- `lib/session.ts` — opaque random session tokens. Only the SHA-256 *hash* of
+  a token is stored, so a database read can't be replayed as a login. Cookies
+  are `HttpOnly`, `SameSite=Lax`, and `Secure` whenever the request is HTTPS.
+- `lib/stripe.ts` — Checkout Session creation and webhook signature
+  verification (HMAC over `timestamp.body`, constant-time compared, with a
+  freshness window to block replays).
+- `api/checkout.ts` — **prices are always recomputed from D1.** The client's
+  cart decides *what* to buy, never what it costs.
+- `api/webhooks/stripe.ts` — marks orders paid, idempotently, since Stripe
+  retries.
+
+**Data**
+
+- `migrations/*.sql` — schema and seed catalog, applied by CI on deploy.
+- `src/data/articles.ts` — editorial content; a CMS in a real version.
+
+## Deploying
+
+See [DEPLOY.md](DEPLOY.md) — it covers the Cloudflare and Stripe setup, the
+local development flow, and an explicit list of what has and hasn't been
+verified.
 
 ## Roadmap
 
-- [ ] Real backend + persistent orders (currently client-only)
+- [x] Real backend + persistent orders
 - [x] Brand partner intake flow
+- [x] Accounts and sessions
+- [x] Payments (Stripe Checkout)
+- [ ] Reconcile orders whose webhook never arrived
+- [ ] Rate limiting on auth endpoints
+- [ ] Transactional email (confirmations, password reset)
 - [ ] Expand the rating engine beyond keyword matching (e.g. ingredient DB)
-- [ ] Payments
 
 ## Status
 
-Early and actively evolving as a side project. See commit history for the
-build-out.
+A side project, built in the open. The payment path is implemented but has
+only been exercised against locally signed payloads, not live Stripe traffic —
+see the verification notes in [DEPLOY.md](DEPLOY.md) before trusting it with
+real money.
 
 ## License
 
