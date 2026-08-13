@@ -46,6 +46,12 @@ export default function Nav() {
           </Link>
           {user ? (
             <span className="flex items-center gap-3">
+              <Link
+                to="/orders"
+                className="text-kelp dark:text-foam/80 hover:text-deep dark:hover:text-foam transition-colors"
+              >
+                Orders
+              </Link>
               <span className="text-kelp dark:text-foam/70 hidden sm:inline">{user.email}</span>
               <button
                 onClick={logout}

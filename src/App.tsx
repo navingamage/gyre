@@ -16,6 +16,8 @@ const Certifications = lazy(() => import("./pages/Certifications"));
 const Partners = lazy(() => import("./pages/Partners"));
 const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));
+const Orders = lazy(() => import("./pages/Orders"));
+const OrderConfirmation = lazy(() => import("./pages/OrderConfirmation"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 export default function App() {
@@ -39,6 +41,8 @@ export default function App() {
                   <Route path="/partners" element={<Partners />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/register" element={<Register />} />
+                  <Route path="/orders" element={<Orders />} />
+                  <Route path="/order/confirmation" element={<OrderConfirmation />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </Suspense>
