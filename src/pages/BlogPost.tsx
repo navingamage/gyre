@@ -10,13 +10,15 @@ export default function BlogPost() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto px-6 py-10">
-      <Link to="/blog" className="text-sm text-kelp underline">
+    <div className="max-w-2xl mx-auto px-6 py-12">
+      <Link to="/blog" className="text-sm text-kelp dark:text-foam/70 hover:underline">
         ← The Rating Desk
       </Link>
-      <h1 className="text-2xl font-bold text-deep mt-3">{article.title}</h1>
-      <p className="text-kelp mt-1">{article.dek}</p>
-      <p className="mt-6 leading-relaxed">{article.body}</p>
+      <h1 className="font-display text-3xl font-bold text-deep dark:text-foam mt-3">
+        {article.title}
+      </h1>
+      <p className="text-kelp dark:text-foam/70 mt-1">{article.dek}</p>
+      <p className="mt-6 text-deep/90 dark:text-foam/90 leading-relaxed">{article.body}</p>
     </div>
   );
 }
