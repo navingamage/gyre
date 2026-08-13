@@ -5,9 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "dev:full": "wrangler pages dev -- npm run dev",
+    "build": "tsc -b && tsc --noEmit -p tsconfig.functions.json && vite build",
     "preview": "vite preview",
-    "test": "vitest run"
+    "test": "vitest run",
+    "db:migrate:local": "wrangler d1 migrations apply gyre-db --local",
+    "db:migrate:remote": "wrangler d1 migrations apply gyre-db --remote"
   },
   "dependencies": {
     "@fontsource/inter": "^5.3.0",

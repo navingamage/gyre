@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { products } from "../lib/products";
+import { useProducts } from "../hooks/useProducts";
 import ProductCard from "../components/ProductCard";
 import type { Category } from "../types";
 
@@ -13,10 +13,12 @@ const CATEGORIES: (Category | "all")[] = [
 ];
 
 export default function Shop() {
+  const { products, loading, error } = useProducts();
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<Category | "all">("all");
 
   const filtered = useMemo(() => {
+    if (!products) return [];
     return products.filter((p) => {
       const matchesCategory = category === "all" || p.category === category;
       const matchesQuery =
@@ -25,7 +27,7 @@ export default function Shop() {
         p.brand.toLowerCase().includes(query.toLowerCase());
       return matchesCategory && matchesQuery;
     });
-  }, [query, category]);
+  }, [products, query, category]);
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-12">
@@ -62,7 +64,11 @@ export default function Shop() {
         </select>
       </div>
 
-      {filtered.length === 0 ? (
+      {loading ? (
+        <p className="text-kelp dark:text-foam/70">Loading catalog…</p>
+      ) : error ? (
+        <p className="text-coral">{error}</p>
+      ) : filtered.length === 0 ? (
         <p className="text-kelp dark:text-foam/70">No products match your search.</p>
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-3 gap-5">

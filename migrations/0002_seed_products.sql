@@ -1,0 +1,13 @@
+INSERT INTO products (id, slug, name, brand, category, price_cents, materials, synthetics, packaging, description) VALUES
+('p1', 'stainless-steel-water-bottle', 'Insulated Water Bottle', 'Basalt & Co', 'kitchen', 3400, '["stainless-steel","silicone"]', '[]', 'plastic-free', '18/8 stainless steel bottle with a silicone base grip. No plastic lining.'),
+('p2', 'beeswax-food-wraps', 'Beeswax Food Wraps (3-pack)', 'Hollow Reed', 'kitchen', 2200, '["organic-cotton","beeswax","tree-resin"]', '[]', 'plastic-free', 'Reusable alternative to cling film. Cotton coated in beeswax, jojoba oil and tree resin.'),
+('p3', 'bamboo-cutlery-set', 'Travel Cutlery Set', 'Basalt & Co', 'kitchen', 1800, '["bamboo","organic-cotton"]', '[]', 'plastic-free', 'Fork, knife, spoon and chopsticks in a cotton roll pouch.'),
+('p4', 'solid-shampoo-bar', 'Solid Shampoo Bar', 'Fernglen', 'personal-care', 1400, '["saponified-oils","essential-oils"]', '["fragrance"]', 'plastic-free', 'Cold-processed bar, no liquid fillers, no microbead exfoliants.'),
+('p5', 'bamboo-toothbrush', 'Bamboo Toothbrush (4-pack)', 'Fernglen', 'personal-care', 1200, '["bamboo","boar-bristle"]', '[]', 'plastic-free', 'Moso bamboo handle. Bristle-only tip, no nylon.'),
+('p6', 'deodorant-cream-jar', 'Deodorant Cream', 'Fernglen', 'personal-care', 1600, '["shea-butter","arrowroot-powder","baking-soda"]', '[]', 'plastic-free', 'Glass jar deodorant cream, no aluminum, no synthetic emulsifiers.'),
+('p7', 'organic-cotton-tee', 'Organic Cotton Tee', 'Loam & Field', 'clothing', 3800, '["organic-cotton"]', '[]', 'plastic-free', '100% GOTS-certified organic cotton, undyed thread, no synthetic blends.'),
+('p8', 'wool-socks', 'Merino Wool Socks', 'Loam & Field', 'clothing', 2000, '["merino-wool"]', '["elastane"]', 'recycled-plastic', 'Mostly wool with a small amount of elastane for stretch at the cuff.'),
+('p9', 'linen-baby-swaddle', 'Linen Baby Swaddle', 'Small Harbor', 'baby', 2800, '["linen"]', '[]', 'plastic-free', 'European flax linen, unbleached, undyed.'),
+('p10', 'wooden-teether', 'Wooden Teething Ring', 'Small Harbor', 'baby', 1500, '["untreated-maple"]', '[]', 'plastic-free', 'Food-safe oiled maple ring, no silicone, no painted finish.'),
+('p11', 'wool-dryer-balls', 'Wool Dryer Balls (6-pack)', 'Hollow Reed', 'home', 1900, '["new-zealand-wool"]', '[]', 'plastic-free', 'Replaces dryer sheets, which shed synthetic fibers and coatings.'),
+('p12', 'coir-dish-brush', 'Coconut Fiber Dish Brush', 'Hollow Reed', 'home', 900, '["coconut-coir","beech-wood"]', '[]', 'plastic-free', 'Coir bristles set in a beech handle. Compostable at end of life.');

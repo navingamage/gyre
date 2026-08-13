@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { products } from "../lib/products";
+import { useProducts } from "../hooks/useProducts";
 import { rateProduct } from "../lib/rating";
 import { articles } from "../data/articles";
 import ProductCard from "../components/ProductCard";
@@ -51,7 +51,8 @@ const VALUE_PROPS = [
 ];
 
 export default function Home() {
-  const featured = products
+  const { products } = useProducts();
+  const featured = (products ?? [])
     .map((p) => ({ product: p, rating: rateProduct(p) }))
     .filter(({ rating }) => rating.grade === "A")
     .slice(0, 3)
@@ -125,21 +126,23 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-6 py-16 border-t border-deep/10 dark:border-slate-700">
-        <div className="flex items-end justify-between mb-6">
-          <h2 className="font-display text-2xl font-bold text-deep dark:text-foam">
-            Top-rated this week
-          </h2>
-          <Link to="/shop" className="text-sm text-kelp dark:text-foam/70 hover:underline">
-            Shop all →
-          </Link>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-          {featured.map((p) => (
-            <ProductCard key={p.id} product={p} />
-          ))}
-        </div>
-      </section>
+      {featured.length > 0 && (
+        <section className="max-w-6xl mx-auto px-6 py-16 border-t border-deep/10 dark:border-slate-700">
+          <div className="flex items-end justify-between mb-6">
+            <h2 className="font-display text-2xl font-bold text-deep dark:text-foam">
+              Top-rated this week
+            </h2>
+            <Link to="/shop" className="text-sm text-kelp dark:text-foam/70 hover:underline">
+              Shop all →
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+            {featured.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
+          </div>
+        </section>
+      )}
 
       {latestArticle && (
         <section className="max-w-6xl mx-auto px-6 pb-20">

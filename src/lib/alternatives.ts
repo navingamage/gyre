@@ -1,15 +1,14 @@
 import type { Product } from "../types";
-import { products } from "./products";
 import { rateProduct } from "./rating";
 
 /**
- * Suggests up to `limit` alternatives in the same category with a
- * strictly better microplastic rating than the given product.
+ * Suggests up to `limit` alternatives from `catalog` in the same category
+ * with a strictly better microplastic rating than the given product.
  */
-export function suggestAlternatives(product: Product, limit = 3): Product[] {
+export function suggestAlternatives(product: Product, catalog: Product[], limit = 3): Product[] {
   const baseline = rateProduct(product).score;
 
-  return products
+  return catalog
     .filter((p) => p.id !== product.id && p.category === product.category)
     .map((p) => ({ product: p, score: rateProduct(p).score }))
     .filter(({ score }) => score > baseline)

@@ -16,5 +16,4 @@ export interface Product {
   synthetics: string[];
   packaging: "plastic-free" | "recycled-plastic" | "mixed";
   description: string;
-  image: string;
 }

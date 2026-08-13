@@ -14,7 +14,6 @@ function makeProduct(overrides: Partial<Product>): Product {
     synthetics: [],
     packaging: "plastic-free",
     description: "",
-    image: "",
     ...overrides,
   };
 }

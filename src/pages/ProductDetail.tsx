@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { getProductBySlug } from "../lib/products";
+import { useProduct, useProducts } from "../hooks/useProducts";
 import { rateProduct } from "../lib/rating";
 import { suggestAlternatives } from "../lib/alternatives";
 import { CATEGORY_TINT } from "../lib/categoryStyles";
@@ -10,15 +10,22 @@ import CategoryIcon from "../components/icons/CategoryIcon";
 
 export default function ProductDetail() {
   const { slug } = useParams();
-  const product = slug ? getProductBySlug(slug) : undefined;
+  const { product, loading, error } = useProduct(slug);
+  const { products: catalog } = useProducts();
+  const { addItem } = useCart();
 
+  if (loading) {
+    return <div className="max-w-2xl mx-auto px-6 py-10">Loading…</div>;
+  }
+  if (error) {
+    return <div className="max-w-2xl mx-auto px-6 py-10 text-coral">{error}</div>;
+  }
   if (!product) {
     return <div className="max-w-2xl mx-auto px-6 py-10">Product not found.</div>;
   }
 
   const rating = rateProduct(product);
-  const alternatives = suggestAlternatives(product);
-  const { addItem } = useCart();
+  const alternatives = catalog ? suggestAlternatives(product, catalog) : [];
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-12">
